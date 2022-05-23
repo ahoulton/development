@@ -1,0 +1,87 @@
+on load:
+	execute console command "gamerule announceAdvancements false"
+
+on join:
+	set join message to "&e%player's displayname% &7has &ajoined&7."
+	teleport player to {locations::spawn}
+
+on join:
+	set {_nc} to "&6" if player is op
+	set {_nc} to "&7" if player isn't op
+	wait 1 tick
+	send "%nl%&7Welcome to &e&lr/placemh&r&7, %{_nc}%%player's displayname%&7!%nl%%nl%&7This is a Minecraft clone of the famous &dr/place&7.%nl%%nl%&b&nLeft click&r &7the stick to draw using the block that you chosen.%nl%&b&nRight click&r &7the stick to choose the color to draw with.%nl%%nl%&7Review our &b/rules &7before drawing.%nl%&7Join our &9/discord &7to stay in touch with the community.%nl%%nl%&7&oOwned by: Houlton.%nl%"
+
+on join:
+	wait 1 tick
+	set player's flight mode to true
+	
+on quit:
+	set quit message to "&e%player's displayname% &7has &cleft&7."
+
+on gamemode change:
+	wait 1 tick
+	set player's flight mode to true
+
+command /spawn:
+	trigger:
+		teleport player to {locations::spawn}
+
+on damage:
+	cancel event
+	
+on hunger bar change:
+	cancel event
+	
+on spawn:
+	cancel event
+
+on command:
+	command starts with "/op" or "/minecraft:op" or "/deop" or "/minecraft:deop"
+	if executor is console:
+		stop
+	if player's uuid isn't "1f2ae163-b1d9-45b8-8ef0-e2b98cdbef21":
+		send "&cOnly Houlton can manage operators."
+		cancel event
+
+on chat:
+	if {slowchat} is set:
+		if difference between {slowchat::%player's uuid%} and now <= {slowchat}:
+			send "&cPlease wait before sending another message."
+			cancel event
+	set {_mc} to "&f" if player is op
+	set {_mc} to "&7" if player isn't op
+	set {slowchat::%player's uuid%} to now
+	set chat format to "%player's prefix%%player's displayname%%{_mc}%: %{_mc}%%message%"
+
+command /slowchat <timespan>:
+	permission: op
+	trigger:
+		if {slowchat} is arg 1:
+			send "&cAlready %arg-1%&c."
+			stop
+		set {slowchat} to arg-1
+		send "&7Changed chat cooldown to: &a%{slowchat}%"
+
+command /discord:
+	trigger:
+		send formatted "&7Click <link:https://discord.gg/QGGJRGq3jN>&9&lHERE &r&7to join our &9Discord&7."
+
+on load:
+	delete {rules::*} if {rules::*} is set
+	add "Don't build anything inappropiate that may get the server suspended." to {rules::*}
+	add "Don't say any slurs for any reason." to {rules::*}
+	add "Follow Minehut guidelines/TOS at all times." to {rules::*}
+
+command /rules:
+	trigger:
+		set {_r} to 1
+		set {_s} to 9
+		create a gui with virtual chest inventory with 4 rows named "Rules":
+			make gui 4 with nametag named "&6Note:" with lore "&7We try not to be too strict with our enforcement.%nl%&7If you have any questions, contact staff.":
+				stop
+			loop {rules::*}:
+				make gui {_s} with paper named "&6Rule %{_r}%&7:" with lore "&7%loop-value%":
+					stop
+				add 1 to {_r}
+				add 1 to {_s}
+		open last gui for player

@@ -1,0 +1,159 @@
+on join:
+	set player's gamemode to adventure if player's gamemode isn't adventure
+	set player's helmet to air
+	set player's chestplate to air
+	set player's leggings to air
+	set player's boots to air
+	clear player's inventory
+	set player's selected hotbar slot to slot 0 of player
+	set slot 0 of player's inventory to stick named "&aDraw"
+	set slot 1 of player's inventory to blaze rod named "&bInspect Block"
+
+on left click:
+	event-item is stick named "&aDraw"
+	if target block is {draw::selectedblock::%player's uuid%}:
+		stop
+	if target block isn't any wool:
+		stop
+	if difference between {draw::cooldown::%player's uuid%} and now <= {draw::globalcooldown::*}:
+		{draw::bypasscooldown::*} doesn't contain player's uuid
+		set {_difference} to difference between {draw::cooldown::%player's uuid%} and now
+		send action bar "&7You need to wait &e&n%{draw::globalcooldown::*}%&r&7, it's been &e&n%{_difference}%&r&7." to player
+		stop
+	set {draw::cooldown::%player's uuid%} to now if {draw::bypasscooldown::*} doesn't contain player's uuid
+	set {_c} to {draw::selectedblock::%player's uuid%} if {draw::selectedblock::%player's uuid%} is set
+	set {_c} to "white wool" parsed as item type if {draw::selectedblock::%player's uuid%} isn't set
+	set {draw::paintedby::%target block's location%} to player's displayname	
+	set target block to {_c}
+
+on right click:
+	event-item is stick named "&aDraw"
+	create a gui with virtual chest inventory with 2 rows named "&dColour Picker&r":
+		make gui slot 0 with black wool named "&fBlack":
+			set {draw::selectedblock::%player's uuid%} to "black wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 1 with blue wool named "&1Blue":
+			set {draw::selectedblock::%player's uuid%} to "blue wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 2 with brown wool named "&fBrown":
+			set {draw::selectedblock::%player's uuid%} to "brown wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 3 with cyan wool named "&bCyan":
+			set {draw::selectedblock::%player's uuid%} to "cyan wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 4 with gray wool named "&7Grey":
+			set {draw::selectedblock::%player's uuid%} to "grey wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 5 with green wool named "&2Green":
+			set {draw::selectedblock::%player's uuid%} to "green wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 6 with light blue wool named "&bLight Blue":
+			set {draw::selectedblock::%player's uuid%} to "light blue wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 7 with light gray wool named "&7Light Grey":
+			set {draw::selectedblock::%player's uuid%} to "light grey wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 8 with lime wool named "&aLime":
+			set {draw::selectedblock::%player's uuid%} to "lime wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 9 with magenta wool named "&dMagenta":
+			set {draw::selectedblock::%player's uuid%} to "magenta wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 10 with orange wool named "&6Orange":
+			set {draw::selectedblock::%player's uuid%} to "orange wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 11 with pink wool named "&dPink":
+			set {draw::selectedblock::%player's uuid%} to "pink wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 12 with purple wool named "&5Purple":
+			set {draw::selectedblock::%player's uuid%} to "purple wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 13 with red wool named "&4Red":
+			set {draw::selectedblock::%player's uuid%} to "red wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 14 with white wool named "&fWhite":
+			set {draw::selectedblock::%player's uuid%} to "white wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+		make gui slot 15 with yellow wool named "&eYellow":
+			set {draw::selectedblock::%player's uuid%} to "yellow wool" parsed as item type
+			send "&aYou will now draw with: %{draw::selectedblock::%player's uuid%}%"
+			close player's inventory
+	open the last gui to the player
+
+on left click:
+	event-item is blaze rod named "&bInspect Block"
+	make player execute command "draw:paintedby"
+	
+on right click:
+	event-item is blaze rod named "&bInspect Block"
+	make player execute command "draw:paintedby"
+
+command /draw:paintedby:
+	executable by: players
+	trigger:
+		set {_tbl} to target block's location
+		set {_b} to {draw::paintedby::%{_tbl}%} if {draw::paintedby::%{_tbl}%} is set
+		set {_b} to "No one." if {draw::paintedby::%{_tbl}%} isn't set
+		send "&7Painted by: &f%{_b}%" to sender
+		
+command /draw:deletetargetblockdata:
+	executable by: players
+	trigger:
+		set {_tbl} to target block's location
+		if {draw::paintedby::%{_tbl}%} isn't set:
+			send "&7target block's data doesn't exist." to sender
+			stop
+		delete {draw::paintedby::%{_tbl}%} if {draw::paintedby::%{_tbl}%} is set
+		send "&7Deleted target block's data." to sender
+		
+command /draw:clearallblockdata:
+	permission: op
+	trigger:
+		delete {draw::paintedby::*}
+		send "&7Deleted all drawingwith data." to sender
+
+command /draw:setcooldown <timespan>:
+	permission: op
+	trigger:
+		if {draw::globalcooldown::*} is arg-1:
+			send "&7Drawing cooldown is already &c%arg-1%&7, nothing has been changed." to sender
+			stop
+		set {draw::globalcooldown::*} to arg-1
+		send "&7Drawing cooldown set to: &a%arg-1%" to sender
+		
+command /draw:bypasscooldown:
+	permission: op
+	trigger:
+		if {draw::bypasscooldown::*} doesn't contain player's uuid:
+			add player's uuid to {draw::bypasscooldown::*}
+			send "bypassing cooldown"
+		else if {draw::bypasscooldown::*} contains player's uuid:
+			remove player's uuid from {draw::bypasscooldown::*}
+			send "no longer bypassing cooldown"
+
+on inventory click:
+	player's gamemode isn't creative
+	cancel event
+
+on break:
+	gamemode isn't creative
+	cancel event
+	
+on place:
+	gamemode isn't creative
+	cancel event
