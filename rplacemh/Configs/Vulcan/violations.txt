@@ -1,0 +1,38 @@
+[05-21-2022] [20:37:54] mulitiplachion failed Motion (Type B) [VL: 1] [Ping: 46] [TPS: 20] [Version: 1.18.2] [Client: Unresolved] deltaY=0.031299999999999883
+[05-21-2022] [20:38:05] mulitiplachion failed Motion (Type B) [VL: 2] [Ping: 45] [TPS: 20] [Version: 1.18.2] [Client: Unresolved] deltaY=0.031299999999999883
+[05-21-2022] [20:38:36] mulitiplachion failed Motion (Type B) [VL: 3] [Ping: 45] [TPS: 20] [Version: 1.18.2] [Client: Unresolved] deltaY=0.031299999999999883
+[05-21-2022] [20:39:29] Red_Nether_brick failed Timer (Type D) [VL: 8] [Ping: 112] [TPS: 20] [Version: 1.18.2] [Client: Vanilla] balance=88 delay=0
+[05-21-2022] [20:40:15] Red_Nether_brick failed Timer (Type D) [VL: 10] [Ping: 119] [TPS: 20] [Version: 1.18.2] [Client: Vanilla] balance=100 delay=0
+[05-21-2022] [20:40:43] mulitiplachion failed Motion (Type B) [VL: 4] [Ping: 44] [TPS: 20] [Version: 1.18.2] [Client: Unresolved] deltaY=0.03130000000000166
+[05-21-2022] [20:41:09] Red_Nether_brick failed Motion (Type D) [VL: 1] [Ping: 114] [TPS: 20] [Version: 1.18.2] [Client: Vanilla] deltaY=1.100000000020529E-5
+[05-21-2022] [20:41:09] Red_Nether_brick failed Timer (Type D) [VL: 12] [Ping: 114] [TPS: 20] [Version: 1.18.2] [Client: Vanilla] balance=81 delay=0
+[05-21-2022] [20:41:09] Red_Nether_brick failed Motion (Type D) [VL: 2] [Ping: 114] [TPS: 20] [Version: 1.18.2] [Client: Vanilla] deltaY=1.100000000020529E-5
+[05-21-2022] [20:41:09] Red_Nether_brick failed Motion (Type D) [VL: 3] [Ping: 114] [TPS: 20] [Version: 1.18.2] [Client: Vanilla] deltaY=1.100000000020529E-5
+[05-21-2022] [20:41:11] mulitiplachion failed Motion (Type B) [VL: 5] [Ping: 45] [TPS: 20] [Version: 1.18.2] [Client: Unresolved] deltaY=0.03130000000000166
+[05-21-2022] [20:41:13] Red_Nether_brick failed Motion (Type D) [VL: 4] [Ping: 114] [TPS: 20] [Version: 1.18.2] [Client: Vanilla] deltaY=1.100000000020529E-5
+[05-21-2022] [20:41:13] Red_Nether_brick failed Timer (Type D) [VL: 14] [Ping: 114] [TPS: 20] [Version: 1.18.2] [Client: Vanilla] balance=100 delay=0
+[05-21-2022] [20:41:13] Red_Nether_brick failed Motion (Type D) [VL: 5] [Ping: 114] [TPS: 20] [Version: 1.18.2] [Client: Vanilla] deltaY=1.100000000020529E-5
+[05-21-2022] [20:41:13] Red_Nether_brick failed Motion (Type D) [VL: 6] [Ping: 114] [TPS: 20] [Version: 1.18.2] [Client: Vanilla] deltaY=1.100000000020529E-5
+[05-21-2022] [20:41:23] mulitiplachion failed Motion (Type B) [VL: 6] [Ping: 45] [TPS: 20] [Version: 1.18.2] [Client: Unresolved] deltaY=0.03130000000000166
+[05-21-2022] [20:41:29] mulitiplachion failed Motion (Type B) [VL: 7] [Ping: 44] [TPS: 20] [Version: 1.18.2] [Client: Unresolved] deltaY=0.03130000000000166
+[05-21-2022] [20:42:15] mulitiplachion failed Motion (Type B) [VL: 8] [Ping: 44] [TPS: 20] [Version: 1.18.2] [Client: Unresolved] deltaY=0.03130000000000166
+[05-21-2022] [20:43:14] mulitiplachion failed Motion (Type B) [VL: 9] [Ping: 43] [TPS: 20] [Version: 1.18.2] [Client: Unresolved] deltaY=0.031299999999999883
+[05-21-2022] [20:43:30] mulitiplachion failed Motion (Type B) [VL: 10] [Ping: 43] [TPS: 20] [Version: 1.18.2] [Client: Unresolved] deltaY=0.031299999999999883
+[05-22-2022] [14:33:30] RustyDj failed Bad Packets (Type G) [VL: 1] [Ping: 0] [TPS: 20] [Version: 1.18.2] [Client: Lunarclient:4a6937e] slot=1 lastSlot=1
+[05-22-2022] [15:07:02] surebarley failed Timer (Type A) [VL: 4] [Ping: 0] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] speed=121.1827435773146% delay=47
+[05-22-2022] [15:07:03] surebarley failed Timer (Type A) [VL: 6] [Ping: 0] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] speed=139.7428731134712% delay=7
+[05-22-2022] [15:07:03] surebarley failed Timer (Type D) [VL: 8] [Ping: 0] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] balance=98 delay=6
+[05-22-2022] [15:07:04] surebarley failed Timer (Type A) [VL: 8] [Ping: 0] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] speed=140.60742407199098% delay=59
+[05-22-2022] [15:07:38] surebarley failed Timer (Type D) [VL: 10] [Ping: 13] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] balance=96 delay=6
+[05-22-2022] [15:07:39] surebarley failed Timer (Type A) [VL: 10] [Ping: 13] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] speed=125.94458438287153% delay=52
+[05-22-2022] [15:07:40] surebarley failed Timer (Type D) [VL: 12] [Ping: 13] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] balance=111 delay=6
+[05-22-2022] [15:07:40] surebarley failed Timer (Type A) [VL: 12] [Ping: 13] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] speed=129.4665976178146% delay=1
+[05-22-2022] [15:07:41] surebarley failed Timer (Type D) [VL: 14] [Ping: 13] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] balance=103 delay=1
+[05-22-2022] [15:07:41] surebarley failed Timer (Type A) [VL: 14] [Ping: 13] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] speed=130.68478829064298% delay=49
+[05-22-2022] [15:08:05] dreamstan_lover failed Bad Packets (Type M) [VL: 1] [Ping: 10] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] delay=48
+[05-22-2022] [15:08:26] dreamstan_lover failed Bad Packets (Type M) [VL: 2] [Ping: 10] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] delay=45
+[05-22-2022] [15:08:51] surebarley failed Bad Packets (Type M) [VL: 1] [Ping: 4] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] delay=51
+[05-22-2022] [15:08:53] surebarley failed Bad Packets (Type M) [VL: 2] [Ping: 4] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] delay=50
+[05-22-2022] [15:08:54] surebarley failed Bad Packets (Type M) [VL: 3] [Ping: 4] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] delay=53
+[05-22-2022] [15:08:56] surebarley failed Bad Packets (Type M) [VL: 4] [Ping: 4] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] delay=53
+[05-22-2022] [15:08:58] surebarley failed Bad Packets (Type M) [VL: 5] [Ping: 4] [TPS: 20] [Version: 1.18.2] [Client: Feather Fabric] delay=54

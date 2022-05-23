@@ -1,0 +1,67 @@
+on gamemode change:
+	player has permission "rank.vip"
+	wait 1 tick
+	set player's flight mode to true
+
+on join:
+	set {data::%player's uuid%::initialjoin} to now if {data::%player's uuid%::initialjoin} isn't set
+	set {data::%player's uuid%::visibility} to true if {data::%player's uuid%::visibility} isn't set
+	teleport player to {locations::spawn}
+	set player's gamemode to adventure
+	set player's flight mode to true if player has permission "rank.vip"
+	set join message to "" if player's group is "default"
+	set join message to "&f%player's prefix%%player% &3joined your lobby." if player's group isn't "default"
+
+on quit:
+	delete {temp::*}  if {temp::*} is set
+	set quit message to ""
+
+on damage:
+	cancel event
+
+on food bar change:
+	cancel event
+
+on drop:
+	cancel event
+
+on player portal:
+	cancel event
+
+on swap hand items:
+	cancel event
+
+on inventory click:
+	player's gamemode isn't creative
+	cancel event
+
+command /elytra:
+	aliases: /ely
+	permission: rank.vip
+	trigger:
+		set player's chestplate to elytra
+		push player upwards at speed 10
+
+command /spawn:
+	trigger:
+		teleport player to {locations::spawn}
+
+command /gmc:
+	executable by: players
+	permission: rank.mod
+	trigger:
+		if player's gamemode is creative:
+			send "You are already in Creative Mode" to sender
+			stop
+		set player's gamemode to creative
+		send "Set own game mode to Creative Mode" to sender
+
+command /gma:
+	executable by: players
+	permission: rank.mod
+	trigger:
+		if player's gamemode is adventure:
+			send "You are already in Adventure Mode" to sender
+			stop
+		set player's gamemode to adventure
+		send "Set own game mode to Adventure Mode" to sender

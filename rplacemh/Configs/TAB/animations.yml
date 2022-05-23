@@ -1,0 +1,6 @@
+info:
+  change-interval: 5000
+  texts:
+  - '&7Ping: &a%ping%ms'
+  - '&7TPS: &b%tps%'
+  - "&7Used memory: &6%memory-used% &eMB &7/ &6%memory-max% &eMB"

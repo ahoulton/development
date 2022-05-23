@@ -1,0 +1,36 @@
+on load:
+    set {lmute} to false if {lmute} isn't set
+
+on chat:
+    if {lmute} is true:
+        player doesn't have permission "rank.helper"
+        cancel event
+        send "&cLobbies are muted!"
+    set {_color} to "&7" if player doesn't have permission "rank.vip"
+    set {_color} to "&f" if player has permission "rank.vip"
+    set chat format to "%player's prefix%%player%%{_color}%: %{_color}%%message%"
+
+command /lmute:
+    permission: rank.helper
+    trigger:
+        if {lmute} is false:
+            set {lmute} to true
+            send "&eThe lobbies have been muted" to all players where [input has permission "rank.helper"]
+        else if {lmute} is true:
+            set {lmute} to false
+            send "&eThe lobbies have been unmuted" to all players where [input has permission "rank.helper"]
+
+command /advertise <text> <text>:
+    aliases: /ad
+    executable by: players
+    usage: &cInvaild sub-command. Please use: &r/advertise <server> <message>
+    trigger:
+        if difference between {adcooldown::%player's uuid%} and now < 5 second:
+            send "&cToo quick! It's been &7%difference between {adcooldown::%player's uuid%} and now% &csince your last advertisement."
+            stop
+        set {adcooldown::%player's uuid%} to now
+        set {_color} to "&7" if player doesn't have permission "rank.vip"
+        set {_color} to "&f" if player has permission "rank.vip"
+        set {_ad} to colored argument 2 if player has permission "rank.vip"
+        set {_ad} to argument 2 if player doesn't have permission "rank.vip"
+        send "&d[AD] %player's prefix%%player%%{_color}%: /join %arg 1% %{_ad}%" to all players
