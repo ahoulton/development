@@ -125,7 +125,7 @@ command /draw:clearallblockdata:
 	permission: op
 	trigger:
 		delete {draw::paintedby::*}
-		send "&7Deleted all drawingwith data." to sender
+		send "&7Deleted all block data." to sender
 
 command /draw:setcooldown <timespan>:
 	permission: op

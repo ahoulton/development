@@ -4,17 +4,13 @@ on load:
 on join:
 	set join message to "&e%player's displayname% &7has &ajoined&7."
 	teleport player to {locations::spawn}
-
-on join:
-	set {_nc} to "&6" if player is op
-	set {_nc} to "&7" if player isn't op
-	wait 1 tick
-	send "%nl%&7Welcome to &e&lr/placemh&r&7, %{_nc}%%player's displayname%&7!%nl%%nl%&7This is a Minecraft clone of the famous &dr/place&7.%nl%%nl%&b&nLeft click&r &7the stick to draw using the block that you chosen.%nl%&b&nRight click&r &7the stick to choose the color to draw with.%nl%%nl%&7Review our &b/rules &7before drawing.%nl%&7Join our &9/discord &7to stay in touch with the community.%nl%%nl%&7&oOwned by: Houlton.%nl%"
-
-on join:
 	wait 1 tick
 	set player's flight mode to true
-	
+	send title "&7Please note:" with subtitle "&7The canva may be &c&nreset&r &7with/without notice." to player for 4 seconds
+	set {_nc} to "&6" if player is op
+	set {_nc} to "&7" if player isn't op
+	send "%nl%&7Welcome to &e&lr/placemh&r&7, %{_nc}%%player's displayname%&7!%nl%%nl%&7This is a Minecraft clone of the famous &dr/place&7.%nl%%nl%&b&nLeft click&r &7the stick to draw using the block that you chosen.%nl%&b&nRight click&r &7the stick to choose the color to draw with.%nl%%nl%&7Review our &b/rules &7before drawing.%nl%&7Join our &9/discord &7to stay in touch with the community.%nl%%nl%&7&oOwned by: Houlton.%nl%"
+
 on quit:
 	set quit message to "&e%player's displayname% &7has &cleft&7."
 
@@ -34,14 +30,6 @@ on hunger bar change:
 	
 on spawn:
 	cancel event
-
-on command:
-	command starts with "/op" or "/minecraft:op" or "/deop" or "/minecraft:deop"
-	if executor is console:
-		stop
-	if player's uuid isn't "1f2ae163-b1d9-45b8-8ef0-e2b98cdbef21":
-		send "&cOnly Houlton can manage operators."
-		cancel event
 
 on chat:
 	if {slowchat} is set:
