@@ -109,9 +109,10 @@ command /draw:paintedby:
 		set {_tbl} to target block's location
 		set {_b} to {draw::paintedby::%{_tbl}%} if {draw::paintedby::%{_tbl}%} is set
 		set {_b} to "No one." if {draw::paintedby::%{_tbl}%} isn't set
-		send "&7Painted by: &f%{_b}%" to sender
+		send "&7Painted by: &f%{_b}% &8(&f%{_tbl}%&8)" to sender
 		
 command /draw:deletetargetblockdata:
+	permission: op
 	executable by: players
 	trigger:
 		set {_tbl} to target block's location
