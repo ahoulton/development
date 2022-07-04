@@ -6,10 +6,10 @@ on join:
 	teleport player to {locations::spawn}
 	wait 1 tick
 	set player's flight mode to true
-	send title "&7Please note:" with subtitle "&7The canva may be &c&nreset&r &7with/without notice." to player for 4 seconds
+	send title "&7Please note:" with subtitle "&7The canva may be &c&nreset&r &7with/without notice." to player for 5 seconds
 	set {_nc} to "&6" if player is op
 	set {_nc} to "&7" if player isn't op
-	send "%nl%&7Welcome to &e&lr/placemh&r&7, %{_nc}%%player's displayname%&7!%nl%%nl%&7This is a Minecraft clone of the famous &dr/place&7.%nl%%nl%&b&nLeft click&r &7the stick to draw using the block that you chosen.%nl%&b&nRight click&r &7the stick to choose the color to draw with.%nl%%nl%&7Review our &b/rules &7before drawing.%nl%&7Join our &9/discord &7to stay in touch with the community.%nl%%nl%&7&oOwned by: Houlton.%nl%"
+	send "%nl%&7Welcome to &e&lr/placemh&r&7, %player's prefix%%player's displayname%&7!%nl%%nl%&7This is a Minecraft clone of the famous &dr/place&7.%nl%%nl%&b&nLeft click&r &7the stick to draw using the block that you chosen.%nl%&b&nRight click&r &7the stick to choose the color to draw with.%nl%%nl%&7Review our &b/rules &7before drawing.%nl%&7Join our &9/discord &7to stay in touch with the community.%nl%%nl%&7&oOwned by: Houlton.%nl%"
 
 on quit:
 	set quit message to "&e%player's displayname% &7has &cleft&7."
@@ -17,6 +17,8 @@ on quit:
 on gamemode change:
 	wait 1 tick
 	set player's flight mode to true
+	set slot 2 of player's inventory to wooden axe named "&dWorldEdit Wand" if player's gamemode is creative
+	set slot 2 of player's inventory to air if player's gamemode isn't creative
 
 command /spawn:
 	trigger:
@@ -30,14 +32,17 @@ on hunger bar change:
 	
 on spawn:
 	cancel event
+	
+on drop:
+	cancel event
 
 on chat:
 	if {slowchat} is set:
 		if difference between {slowchat::%player's uuid%} and now <= {slowchat}:
 			send "&cPlease wait before sending another message."
 			cancel event
-	set {_mc} to "&f" if player is op
-	set {_mc} to "&7" if player isn't op
+	set {_mc} to "&f" if player's group isn't "default"
+	set {_mc} to "&7" if player's group is "default"
 	set {slowchat::%player's uuid%} to now
 	set chat format to "%player's prefix%%player's displayname%%{_mc}%: %{_mc}%%message%"
 
@@ -52,7 +57,7 @@ command /slowchat <timespan>:
 
 command /discord:
 	trigger:
-		send formatted "&7Click <link:https://discord.gg/QGGJRGq3jN>&9&lHERE &r&7to join our &9Discord&7."
+		send formatted "&7Click <link:https://discord.gg/XKW89vk7mr>&9&lHERE &r&7to join our &9Discord&7."
 
 on load:
 	delete {rules::*} if {rules::*} is set
@@ -73,3 +78,23 @@ command /rules:
 				add 1 to {_r}
 				add 1 to {_s}
 		open last gui for player
+
+command /gma <player=%player%>:
+	permission: op
+	trigger:
+		make player execute command "gamemode adventure %arg-1%"
+
+command /gmc <player=%player%>:
+	permission: op
+	trigger:
+		make player execute command "gamemode creative %arg-1%"
+		
+command /gms <player=%player%>:
+	permission: op
+	trigger:
+		make player execute command "gamemode survival %arg-1%"
+		
+command /gmsp <player=%player%>:
+	permission: op
+	trigger:
+		make player execute command "gamemode spectator %arg-1%"

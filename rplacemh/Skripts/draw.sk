@@ -106,6 +106,8 @@ on right click:
 command /draw:paintedby:
 	executable by: players
 	trigger:
+		if target block isn't set:
+			stop
 		set {_tbl} to target block's location
 		set {_b} to {draw::paintedby::%{_tbl}%} if {draw::paintedby::%{_tbl}%} is set
 		set {_b} to "No one." if {draw::paintedby::%{_tbl}%} isn't set
@@ -115,6 +117,8 @@ command /draw:deletetargetblockdata:
 	permission: op
 	executable by: players
 	trigger:
+		if target block isn't set:
+			stop
 		set {_tbl} to target block's location
 		if {draw::paintedby::%{_tbl}%} isn't set:
 			send "&7target block's data doesn't exist." to sender
