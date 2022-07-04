@@ -1,14 +1,15 @@
 on gamemode change:
-	player has permission "rank.vip"
+	player's group isn't "default"
 	wait 1 tick
 	set player's flight mode to true
 
 on join:
 	set {data::%player's uuid%::initialjoin} to now if {data::%player's uuid%::initialjoin} isn't set
 	set {data::%player's uuid%::visibility} to true if {data::%player's uuid%::visibility} isn't set
+	set {data::%player's uuid%::credits} to 0 if {data::%player's uuid%::credits} isn't set
 	teleport player to {locations::spawn}
 	set player's gamemode to adventure
-	set player's flight mode to true if player has permission "rank.vip"
+	set player's flight mode to true if player's group isn't "default"
 	set join message to "" if player's group is "default"
 	set join message to "&f%player's prefix%%player% &3joined your lobby." if player's group isn't "default"
 
@@ -37,9 +38,9 @@ on inventory click:
 
 command /elytra:
 	aliases: /ely
-	permission: rank.vip
+	permission: vip
 	trigger:
-		set player's chestplate to elytra
+		set player's chestplate to unbreakable elytra
 		push player upwards at speed 10
 
 command /spawn:
@@ -48,7 +49,7 @@ command /spawn:
 
 command /gmc:
 	executable by: players
-	permission: rank.mod
+	permission: staff
 	trigger:
 		if player's gamemode is creative:
 			send "You are already in Creative Mode" to sender
@@ -58,10 +59,15 @@ command /gmc:
 
 command /gma:
 	executable by: players
-	permission: rank.mod
+	permission: staff
 	trigger:
 		if player's gamemode is adventure:
 			send "You are already in Adventure Mode" to sender
 			stop
 		set player's gamemode to adventure
 		send "Set own game mode to Adventure Mode" to sender
+
+command /debug:networkstats:
+	permission: op
+	trigger:
+		send "Player Count: %{stats::formatted::player_count}%%nl%Server Count: %{stats::formatted::server_count}%%nl%Server Max: %{stats::formatted::server_max}%%nl%Ram Count: %{stats::formatted::ram_count}%%nl%Ram Max: %{stats::formatted::ram_max}%" to sender

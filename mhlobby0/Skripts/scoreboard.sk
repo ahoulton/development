@@ -16,19 +16,75 @@ on unload:
 
 on join:
     while player is online:
+        if {data::%player's uuid%::servers::*} is set:
+            {sb::%player's uuid%} is "noservers"
+            clear player's scoreboard
+        if {data::%player's uuid%::servers::*} isn't set:
+            {sb::%player's uuid%} is "hasservers"
+            clear player's scoreboard
+        wait 0.5 seconds
+
+on join:
+    while player is online:
         set title of player's scoreboard to "&b&lMINEHUT"
-        set line 10 of player's scoreboard to ""
-        if player's group is "default":
-            set line 9 of player's scoreboard to "&7Rank: &7Default"
-        else if player's group isn't "default":
-            set line 9 of player's scoreboard to "&7Rank: &f%player's prefix%"
-        set line 8 of player's scoreboard to "&7Lobby: &f##0"
-        set line 7 of player's scoreboard to ""
-        set line 6 of player's scoreboard to "&7Players: &f%{stats::players}%"
-        set line 5 of player's scoreboard to "&7Servers: &f%{stats::servers}%"
-        set line 4 of player's scoreboard to ""
-        set line 3 of player's scoreboard to "&fStart your own"
-        set line 2 of player's scoreboard to "&fserver for free"
-        set line 1 of player's scoreboard to "&fat &bminehut.com&f!"
-        toggle player's scoreboard on if scoreboard of player is off
-        wait 0.5 second
+        if {data::%player's uuid%::servers::*} isn't set:
+            set {sb::%player's uuid%} to "noservers" if {sb::%player's uuid%} isn't "noservers"
+            set line 10 of player's scoreboard to ""
+            if player's group is "default":
+                set line 9 of player's scoreboard to "&7Rank: &7Default"
+            else if player's group isn't "default":
+                set line 9 of player's scoreboard to "&7Rank: &f%player's prefix%"
+            set line 8 of player's scoreboard to "&7Lobby: &f##0"
+            set line 7 of player's scoreboard to ""
+            set line 6 of player's scoreboard to "&7Players: &f%{stats::players}%"
+            set line 5 of player's scoreboard to "&7Servers: &f%{stats::servers}%"
+            set line 4 of player's scoreboard to ""
+            set line 3 of player's scoreboard to "&fStart your own"
+            set line 2 of player's scoreboard to "&fserver for free"
+            set line 1 of player's scoreboard to "&fat &bminehut.com&f!"
+            wait 0.5 second
+        else if {data::%player's uuid%::servers::*} is set:
+            set {sb::%player's uuid%} to "hasservers" if {sb::%player's uuid%} isn't "hasservers"
+            set line 15 of player's scoreboard to ""
+            if player's group is "default":
+                set line 14 of player's scoreboard to "&7Rank: &7Default"
+            else if player's group isn't "default":
+                set line 14 of player's scoreboard to "&7Rank: &f%player's prefix%"
+            set line 13 of player's scoreboard to "&7Credits: &f%{data::%player's uuid%::credits}%"
+            set line 12 of player's scoreboard to "&7Spending: &f0/day"
+            set line 11 of player's scoreboard to ""
+            set line 10 of player's scoreboard to "&7Players: &f%{stats::players}%"
+            set line 9 of player's scoreboard to "&7Servers: &f%{stats::servers}%"
+            set line 8 of player's scoreboard to ""
+            set line 7 of player's scoreboard to "&f| My Servers (%amount of {data::%player's uuid%::servers::*}%):"
+            set {_line} to 6
+            loop {data::%player's uuid%::servers::*}:
+                if {_line} <= 0:
+                    stop
+                set line {_line} of player's scoreboard to "&f| &f%loop-value%: &cFree"
+                remove 1 from {_line}
+            wait 0.5 second
+
+command /debug:sb:addserver <text> <offline player=%player%>:
+    permission: op
+    trigger:
+        if {data::%arg 2's uuid%::servers::*} contains arg 1:
+            send "uhhhh, %arg-2% already has a server with that name!" to sender
+            stop
+        add arg 1 to {data::%arg 2's uuid%::servers::*}
+        send "Added %arg-1% to %arg-2%'s server list." to sender
+
+command /debug:sb:removeserver <text> <offline player=%player%>:
+    permission: op
+    trigger:
+        if {data::%arg 2's uuid%::servers::*} doesn't contain arg 1:
+            send "uhhhh, %arg-2% doesn't have a server with that name!" to sender
+            stop
+        remove arg 1 from {data::%arg 2's uuid%::servers::*}
+        send "Removed %arg-1% from %arg-2%'s server list." to sender
+
+command /debug:sb:setcredits <integer> <offline player=%player%>:
+    permission: op
+    trigger:
+        set {data::%arg 2's uuid%::credits} to arg 1
+        send "Set %arg 2%'s credit(s) to %arg-1%." to sender
