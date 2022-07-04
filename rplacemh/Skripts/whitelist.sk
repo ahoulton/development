@@ -1,10 +1,11 @@
 on load:
 	set {whitelist} to false if {whitelist} isn't set
+	set {whitelist::message} to "&cWe are under maintenance, we're sorry for any inconvenience that this may cause." if {whitelist::message} isn't set
 
 on connect:
 	{whitelist} is true
 	player doesn't have permission "whitelist.bypass"
-	kick player due to "&cWe are under maintenance, we're sorry for any inconvenience that this may cause."
+	kick player due to "%{whitelist::message}%"
 	
 command /whitelist <boolean>:
 	permission: staff.whitelist
@@ -22,3 +23,17 @@ command /whitelist <boolean>:
 				stop
 			set {whitelist} to false
 			send "&cDisabled &7whitelist."
+
+command /whitelist:setwlmsg [<text>]:
+	permission: staff.whitelist.setmsg
+	trigger:
+		if arg 1 isn't set:
+			send "&7Whitelist message: &f%{whitelist::message}%" to sender
+			stop
+		set {whitelist::message} to colored arg-1
+		send "&7Whitelist message: &f%{whitelist::message}%" to sender
+
+command /whitelist:kickall:
+	permission: staff.whitelist.kickall
+	trigger:
+		kick all players due to "%{whitelist::message}%"

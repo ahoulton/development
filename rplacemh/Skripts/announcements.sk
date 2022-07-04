@@ -2,7 +2,7 @@ function addAnnouncement(type: text, msg: text):
     add "&c&lHELP &7- &f%colored {_msg}%" to {auto-announcements::*} if {_type} is "help"
     add "&e&lTIP &7- &f%colored {_msg}%" to {auto-announcements::*} if {_type} is "tip"
 
-every 4 minutes:
+every 5 minutes:
     set {_a} to a random element out of {auto-announcements::*} if {auto-announcements::*} is set
     send "%nl%%{_a}%%nl%" to all players if {auto-announcements::*} is set
 

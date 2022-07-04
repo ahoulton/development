@@ -1,0 +1,49 @@
+on join:
+    player has permission "staff"
+    send "&7[STAFF] &f%player's prefix%%player's displayname% &7has &ajoined&7." to all players where [input has permission "staff"]
+
+on quit:
+    player has permission "staff"
+    send "&7[STAFF] &f%player's prefix%%player's displayname% &7has &cleft&7." to all players where [input has permission "staff"]
+
+command /sc [<text>]:
+    aliases: /staffchat
+    permission: staff
+    trigger:
+        if arg 1 isn't set:
+            if {sctoggled::*} doesn't contain player's uuid:
+                add player's uuid to {sctoggled::*}
+                send "&aToggled staff chat on." to player
+            else if {sctoggled::*} contains player's uuid:
+                remove player's uuid from {sctoggled::*}
+                send "&cToggled staff chat off." to player
+        else if arg 1 is set:
+            send "&7[STAFF] &f%player's prefix%%player's displayname%&7: &f%arg-1%" to all players where [input has permission "staff"]
+
+command /p <offline player> [<text>]:
+    aliases: /punish
+    permission: staff
+    trigger:
+        set {punish::punishing::%player's uuid%} to arg-1
+        if arg 2 isn't set:
+            create a gui with virtual chest inventory with 3 rows named "Punish %arg-1%":
+                make gui slot 12 with nametag named "&7Chat Offenses":
+                    close player's inventory
+                    wait 1 tick
+                    make player execute command "p %{punish::punishing::%player's uuid%}% chat"
+                make gui slot 14 with diamond sword named "&7Gameplay Offenses":
+                    close player's inventory
+                    wait 1 tick
+                    make player execute command "p %{punish::punishing::%player's uuid%}% gameplay"
+        if arg 2 is set:
+            arg 2 is "chat":
+                create a gui with virtual chest inventory with 3 rows named "Punish %arg-1%":
+                    make gui slot 10 with nametag named "&7Flood/Spam" with lore "&7&oUser is repeating messages or%nl%&7&osending the same/simular message multiple times.":
+                        stop
+            arg 2 is "gameplay":
+                create a gui with virtual chest inventory with 3 rows named "Punish %arg-1%":
+                    make gui slot 10 with diamond sword named "&7Cheating" with lore "&7&oUser is using obvious cheats/hacks.":
+                        stop
+                    make gui slot 11 with stick named "&7Inappropiate/suspendable drawing." with lore "&7&oUser is drawing something inappropiate%nl%&7&oor something that could get the server suspended.":
+                        stop
+        open the last gui to the player

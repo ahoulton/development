@@ -37,6 +37,10 @@ on drop:
 	cancel event
 
 on chat:
+	if {sctoggled::*} contains player's uuid:
+		make player execute command "sc %message%"
+		cancel event
+		stop
 	if {slowchat} is set:
 		if difference between {slowchat::%player's uuid%} and now <= {slowchat}:
 			send "&cPlease wait before sending another message."
